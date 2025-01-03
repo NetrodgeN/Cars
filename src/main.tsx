@@ -1,12 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './normalize.scss'
 import {
     createRouter,
     RouterProvider,
 } from "@tanstack/react-router";
 import {routeTree} from "./routeTree.gen.ts";
 
+import {ModalProvider} from "./context/modal-context/modal-provider.tsx";
 const router = createRouter({
     routeTree,
     defaultPreload: 'intent',
@@ -22,7 +23,9 @@ if (!rootElement.innerHTML) {
     const root = createRoot(rootElement)
     root.render(
         <StrictMode>
-            <RouterProvider router={router} />
+            <ModalProvider>
+                <RouterProvider router={router} />
+            </ModalProvider>
         </StrictMode>,
     )
 }
