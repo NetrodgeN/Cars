@@ -8,10 +8,14 @@ import {
 import {routeTree} from "./routeTree.gen.ts";
 
 import {ModalProvider} from "./context/modal-context/modal-provider.tsx";
+import {store} from "./store";
+import {Provider} from "react-redux";
+
 const router = createRouter({
     routeTree,
     defaultPreload: 'intent',
 })
+
 declare module '@tanstack/react-router' {
     interface Register {
         router: typeof router
@@ -23,9 +27,11 @@ if (!rootElement.innerHTML) {
     const root = createRoot(rootElement)
     root.render(
         <StrictMode>
-            <ModalProvider>
+            <Provider store={store}>
+                <ModalProvider>
                 <RouterProvider router={router} />
             </ModalProvider>
+            </Provider>
         </StrictMode>,
     )
 }

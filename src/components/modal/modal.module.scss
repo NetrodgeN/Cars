@@ -1,4 +1,4 @@
-@import '../../styles/_variables.scss';
+@use "../../styles/_variables.scss" as variables;
 
 .modal-overlay {
   position: fixed;
@@ -22,6 +22,12 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+}
+.modal--size-500 {
+  width: 500px;
+}
+.modal--size-800 {
+  width: 800px;
 }
 .modal::before {
   content: "";
@@ -48,7 +54,7 @@
   cursor: pointer;
   font-size: 16px;
   padding: 8px 12px;
-  color: $main_color;
+  color: variables.$main_color;
   transition: color 0.3s ease;
 }
 

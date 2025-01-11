@@ -9,7 +9,9 @@ import {Portal} from "../portal/portal.tsx";
 
 const cn = classNames.bind(styles)
 
-export const Modal = ({content}: {content: ReactNode}) => {
+export type ModalSize = '500' | '800';
+
+export const Modal = ({content, size = '800'}: {content: ReactNode, size?: ModalSize}) => {
     const { closeModal } = useModal();
     const modalRef = useRef<HTMLDivElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -34,10 +36,13 @@ export const Modal = ({content}: {content: ReactNode}) => {
             closeModal();
         }
     };
+
+
+
     return (
         <Portal>
             <div className={cn('modal-overlay')} onClick={handleOverlayClick}>
-                <div className={cn('modal')} ref={modalRef} tabIndex={-1}>
+                <div className={cn('modal', `modal--size-${size}`)} ref={modalRef} tabIndex={-1}>
                     <div className={cn('modal__header')}>
                         <button
                             className={cn(

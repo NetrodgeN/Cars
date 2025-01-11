@@ -1,13 +1,13 @@
 import {ReactNode, useCallback, useState} from "react";
 import {ModalItem} from "./types.ts";
-import {Modal} from "../../components/modal/modal.tsx";
+import {Modal, ModalSize} from "../../components/modal/modal.tsx";
 import {ModalContext} from "./modal-context.tsx";
 
 export const ModalProvider = ({children}: { children: ReactNode }) => {
     const [modals, setModals] = useState<ModalItem[]>([]);
 
-    const openModal = useCallback((content: ReactNode) => {
-        setModals((prevModals) => [...prevModals, {content}]);
+    const openModal = useCallback((content: ReactNode, {modalSize}: {modalSize?: ModalSize}) => {
+        setModals((prevModals) => [...prevModals, {content, modalSize}]);
     }, []);
 
     const closeModal = useCallback((closeAll: boolean = false) => {
@@ -23,7 +23,7 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
             {children}
             {
             modals.map((modalContent, index) => (
-                <Modal key={index} content={modalContent.content}/>
+                <Modal key={index} content={modalContent.content} size={modalContent?.modalSize}/>
             ))
         }</ModalContext.Provider>
     );

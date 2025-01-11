@@ -1,0 +1,13 @@
+.validatable-input__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+}
+
+.validatable-input__title {
+  padding-bottom: 2px;
+}
+
+.validatable-input__error {
+  color: red;
+}

@@ -1,0 +1,10 @@
+.cell__wrapper {
+  display: flex;
+  align-items: center;
+}
+.expand-icon {
+  transform: rotate(0);
+}
+.expand-icon--rotate {
+  transform: rotate(-90deg);
+}

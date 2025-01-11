@@ -1,0 +1,29 @@
+@use '../../../styles/variables' as variables;
+.popup {
+  position: relative;
+}
+
+.menu {
+  background: variables.$background_color;
+  position: absolute;
+  z-index: 10000;
+  border-radius: 8px;
+  border: 1px solid variables.$border_color;
+  flex-direction: column;
+  display: flex;
+}
+
+.menu__button {
+  padding: 10px 25px;
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.menu__button:hover {
+  background: variables.$accent_color;
+  border-radius: 8px;
+}

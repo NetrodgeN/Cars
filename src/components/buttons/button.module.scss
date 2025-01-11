@@ -1,0 +1,23 @@
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+  border-radius: 6px;
+}
+.button--primary {
+  background-color: #f8aa95;
+  transition: background-color 0.5s ease;
+  color: white;
+  &:hover {
+    background-color: #de7f66;
+  }
+}
+
+.button--small{
+  padding: 4px 8px 4px 8px;
+}
+
+.button--medium{
+  height: 40px;
+  padding: 8px 17px 8px 17px;
+}

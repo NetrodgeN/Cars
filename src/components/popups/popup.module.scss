@@ -1,0 +1,52 @@
+@use '../../styles/variables' as variable;
+
+.popup {
+  position: relative;
+}
+
+.trigger {
+  background: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+  &:hover {
+    border-radius: 6px;
+    background: variable.$background_button_color;
+    transform: rotate(45deg);
+    transition: transform 0.5s;
+  }
+}
+
+.active {
+  background: variable.$accent_color;
+}
+
+.disabled {
+  opacity: 0.7;
+}
+
+.optionsBottomLeft {
+  top: 100%;
+  right: 0;
+}
+
+.optionsBottomRight {
+  top: 100%;
+  left: 0;
+}
+
+.optionsTopRight {
+  bottom: 100%;
+  left: 0;
+}
+
+.optionsTopLeft {
+  right: 0;
+  bottom: 100%;
+}

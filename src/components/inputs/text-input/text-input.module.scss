@@ -1,0 +1,16 @@
+.input {
+  background: transparent;
+  color: #000000;
+  border: 1px solid #5e514d;
+  border-radius: 3px;
+  padding: 13px 0 12px 9px;
+  box-shadow: none;
+
+  &:focus{
+    outline: none;
+  }
+}
+.input--invalid {
+  border: 1px solid #ee0000;
+}
+
