@@ -26,7 +26,9 @@ export const DescriptionCell = (cell: CellContext<Automakers, unknown>) => {
 
   return (
     <div
-      className={cn(isEmpty ? 'description-cell--text' : 'description-cell--active')}
+      className={cn({
+        'description-cell--active': !isEmpty,
+      })}
       onClick={showSpecification}
     >
       {value}

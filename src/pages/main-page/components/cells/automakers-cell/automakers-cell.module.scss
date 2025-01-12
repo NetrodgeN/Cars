@@ -1,4 +1,6 @@
-.cell__wrapper {
+@use '../../../../../styles/variables' as variables;
+
+.automakers-cell {
   display: flex;
   align-items: center;
 }
@@ -7,4 +9,13 @@
 }
 .expand-icon--rotate {
   transform: rotate(-90deg);
+}
+.automakers-cell__sub-row-count {
+  text-align: center;
+  display: inline-block;
+  border: 1px solid variables.$border_gray_color;
+  border-radius: 50%;
+  font-size: 12px;
+  height: 12px;
+  width: 12px;
 }

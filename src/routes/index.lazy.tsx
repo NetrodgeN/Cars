@@ -4,7 +4,7 @@ import {MainPage} from "../pages";
 function HomeComponent() {
   return (
     <div>
-        <h3>Таблица автопроизводителей</h3>
+        <h2 style={{textAlign: "center"}}>Таблица автопроизводителей</h2>
         <MainPage />
     </div>
   )

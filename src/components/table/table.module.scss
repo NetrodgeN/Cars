@@ -1,12 +1,25 @@
+@use '../../styles/variables' as variables;
+
 table {
   border-collapse: separate;
   border-spacing: 0 5px;
   width: 100%;
 }
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: variables.$row_height;
+  background-color: #ffffff;
+}
 
 thead th {
   text-align: left;
-  color: #9d9b9b;
+  color: variables.$gray_color;
+}
+
+tr {
+  height: variables.$row_height
 }
 
 tr:nth-child(even) {
@@ -15,7 +28,7 @@ tr:nth-child(even) {
 td {
   background-color: inherit;
   padding: 10px;
-  border: 1px solid #f2f2f2;
+  border: 1px solid variables.$border_gray_color;
 }
 
 tr td:first-child {

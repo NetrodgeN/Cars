@@ -30,9 +30,10 @@ export const AutomakersCell = (cell: CellContext<Automakers, unknown>) => {
     );
   };
 
+  const subRowCount = row.originalSubRows?.length;
   return (
     <div
-      className={cn("cell__wrapper")}
+      className={cn("automakers-cell")}
       style={{ paddingLeft: `${row.depth * 2}rem` }}
     >
       {row.getCanExpand() && (
@@ -43,8 +44,11 @@ export const AutomakersCell = (cell: CellContext<Automakers, unknown>) => {
         />
       )}
       <span style={{ paddingLeft: row.getCanExpand() ? 0 : 48 }}>
-        {value}
-        {row.originalSubRows?.length ? ` (${row.originalSubRows?.length})` : ""}
+        {value}{' '}
+        <span style={{fontSize: '10px'}}
+        className={cn({
+          'automakers-cell__sub-row-count': subRowCount,
+        })}>{subRowCount ? `${subRowCount}` : ""}</span>
       </span>
     </div>
   );

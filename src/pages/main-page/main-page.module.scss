@@ -1,0 +1,10 @@
+.main-page {
+  display: flex;
+}
+
+.main-page__table-wrapper {
+  flex: 2;
+  padding: 0 40px 40px;
+  overflow-x: auto;
+  height: calc(100vh - 170px);
+}

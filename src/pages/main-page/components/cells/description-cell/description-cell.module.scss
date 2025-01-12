@@ -1,7 +1,9 @@
-.description-cell--text {
-  cursor: text;
-}
-
+@use '../../../../../styles/variables' as variables;
 .description-cell--active {
   cursor: pointer;
+  transition: color 0.5s ease;
+
+  &:hover {
+    color: variables.$accent_color;
+  }
 }

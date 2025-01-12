@@ -1,4 +1,5 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+@use './styles/variables' as variables;
 
 /* Document
    ========================================================================== */
@@ -347,4 +348,22 @@ template {
 
 [hidden] {
   display: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: variables.$accent_color;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: variables.$main_color;
 }
