@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Automakers } from "../../pages/types.ts";
+import {Automakers, Specification} from "../../pages/types.ts";
 import { db } from "./db.ts";
 
 interface AutomakersSliceType {
   automakers: Automakers[];
+  specification: Specification;
 }
 
 const initialState: AutomakersSliceType = {
   automakers: db,
+  specification: {}
 };
 
 export const automakersSlice = createSlice({
@@ -16,6 +18,9 @@ export const automakersSlice = createSlice({
   reducers: {
     updateAutomaker: (state, action: PayloadAction<Automakers[]>) => {
       state.automakers = action.payload;
+    },
+    setActualSpecification: (state, action: PayloadAction<Specification>) => {
+      state.specification = action.payload;
     },
   },
 });

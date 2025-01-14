@@ -942,10 +942,10 @@
   dependencies:
     "@tanstack/store" "^0.7.0"
 
-"@tanstack/history@1.90.0":
-  version "1.90.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/history/-/history-1.90.0.tgz#2d17c8d779559bbeda99742f334bd1c88e5fe3c8"
-  integrity sha512-riNhDGm+fAwxgZRJ0J/36IZis1UDHsDCNIxfEodbw6BgTWJr0ah+G20V4HT91uBXiCqYFvX3somlfTLhS5yHDA==
+"@tanstack/history@1.95.2":
+  version "1.95.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/history/-/history-1.95.2.tgz#dbe688889904365748e9c3ebdca391718ac73a7e"
+  integrity sha512-FgUauZLg+nRybH5dKyAYokmXs064rHc0qpMizKxTegSTMHj/z2B6T7pjEG2Zd6dBegeYNVL97ROg7Srr9cuBug==
 
 "@tanstack/react-form@0.41.0":
   version "0.41.0"
@@ -957,12 +957,12 @@
     "@tanstack/react-store" "^0.7.0"
     decode-formdata "^0.8.0"
 
-"@tanstack/react-router@^1.92.11":
-  version "1.92.11"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-router/-/react-router-1.92.11.tgz#13343268114f385c46af910e20dfe0847a73d10c"
-  integrity sha512-8MKdoFLVOvyTJNGOc/4/+LsJF4ypCOYXvscdpYX69H6RU/k6DBRtcubRJurfFR6qIoKBmMTIPVD9KkdCAJ8PNg==
+"@tanstack/react-router@^1.95.4":
+  version "1.95.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-router/-/react-router-1.95.4.tgz#6cf6ad7b733781ec9fcebbb7465d9ba155048752"
+  integrity sha512-dGp0NTQLqom69wA2FHX6Sw0TQKoFQ/24sZNaIek/KDpMIKj8JInfZCJr2H+bJKm2x0C9Slj8UjlsoXW19CE3KQ==
   dependencies:
-    "@tanstack/history" "1.90.0"
+    "@tanstack/history" "1.95.2"
     "@tanstack/react-store" "^0.7.0"
     jsesc "^3.0.2"
     tiny-invariant "^1.3.3"

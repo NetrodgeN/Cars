@@ -14,6 +14,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
+import { Route as AutomakersIndexImport } from './routes/automakers/index'
+import { Route as AutomakersCarIdImport } from './routes/automakers/$carId'
 
 // Create Virtual Routes
 
@@ -33,6 +35,18 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const AutomakersIndexRoute = AutomakersIndexImport.update({
+  id: '/automakers/',
+  path: '/automakers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AutomakersCarIdRoute = AutomakersCarIdImport.update({
+  id: '/automakers/$carId',
+  path: '/automakers/$carId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -51,6 +65,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/automakers/$carId': {
+      id: '/automakers/$carId'
+      path: '/automakers/$carId'
+      fullPath: '/automakers/$carId'
+      preLoaderRoute: typeof AutomakersCarIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/automakers/': {
+      id: '/automakers/'
+      path: '/automakers'
+      fullPath: '/automakers'
+      preLoaderRoute: typeof AutomakersIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -59,36 +87,46 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/automakers/$carId': typeof AutomakersCarIdRoute
+  '/automakers': typeof AutomakersIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/automakers/$carId': typeof AutomakersCarIdRoute
+  '/automakers': typeof AutomakersIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/automakers/$carId': typeof AutomakersCarIdRoute
+  '/automakers/': typeof AutomakersIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/about' | '/automakers/$carId' | '/automakers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/about' | '/automakers/$carId' | '/automakers'
+  id: '__root__' | '/' | '/about' | '/automakers/$carId' | '/automakers/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutRoute: typeof AboutRoute
+  AutomakersCarIdRoute: typeof AutomakersCarIdRoute
+  AutomakersIndexRoute: typeof AutomakersIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutRoute: AboutRoute,
+  AutomakersCarIdRoute: AutomakersCarIdRoute,
+  AutomakersIndexRoute: AutomakersIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -102,7 +140,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/automakers/$carId",
+        "/automakers/"
       ]
     },
     "/": {
@@ -110,6 +150,12 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/automakers/$carId": {
+      "filePath": "automakers/$carId.tsx"
+    },
+    "/automakers/": {
+      "filePath": "automakers/index.tsx"
     }
   }
 }
