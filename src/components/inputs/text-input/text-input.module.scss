@@ -3,14 +3,22 @@
   color: #000000;
   border: 1px solid #5e514d;
   border-radius: 3px;
-  padding: 13px 0 12px 9px;
+  //padding: 12px 0 12px 8px;
   box-shadow: none;
 
   &:focus{
     outline: none;
   }
 }
+
 .input--invalid {
   border: 1px solid #ee0000;
 }
 
+.input--small {
+  padding: 4px 0 4px 8px;
+}
+
+.input--medium {
+  padding: 12px 0 12px 8px;
+}

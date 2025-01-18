@@ -4,6 +4,7 @@ import {
   ForwardedRef,
   forwardRef,
   KeyboardEventHandler,
+  MouseEventHandler,
 } from "react";
 
 import classNames from "classnames/bind";
@@ -17,13 +18,14 @@ export interface TextInputProps {
   value?: string;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<any> | undefined;
   onFocus?: FocusEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   placeholder?: string;
   disabled?: boolean;
   isRequired?: boolean;
   isError?: boolean;
+  size?: "small" | "medium";
 }
 
 export const TextInput = forwardRef(
@@ -39,15 +41,16 @@ export const TextInput = forwardRef(
       onFocus,
       onKeyDown,
       isError,
+      size = 'medium',
       ...anotherProps
     }: TextInputProps,
-    ref: ForwardedRef<HTMLInputElement>,
+    ref?: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
       <input
         {...anotherProps}
         value={value}
-        className={cn("input", {
+        className={cn("input", `input--${size}`, {
           "input--invalid": isError,
         })}
         placeholder={placeholder}

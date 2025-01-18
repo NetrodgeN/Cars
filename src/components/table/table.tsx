@@ -1,5 +1,6 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   ExpandedState,
   flexRender,
   getCoreRowModel,
@@ -14,6 +15,7 @@ import { useState } from "react";
 
 import classNames from "classnames/bind";
 import styles from "./table.module.scss";
+import TableFilter from "./components/table-filter.tsx";
 
 interface TableProps<TData, TValue = any> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,6 +40,7 @@ export const Table = <TData extends RowData>({
   getRowId,
 }: TableProps<TData>) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     enableRowSelection: true,
@@ -53,14 +56,17 @@ export const Table = <TData extends RowData>({
     getSubRows,
     meta: metaData,
     onExpandedChange: setExpanded,
+    onColumnFiltersChange: setColumnFilters,
     getRowId,
     state: {
       expanded,
+      columnFilters,
     },
+    filterFromLeafRows: true,
   });
 
   return (
-    <table className={cn('table')}>
+    <table className={cn("table")}>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
@@ -72,12 +78,17 @@ export const Table = <TData extends RowData>({
                   style={{ width: header.getSize() }}
                 >
                   {header.isPlaceholder ? null : (
-                    <div>
+                    <>
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
-                    </div>
+                      {header.column.getCanFilter() ? (
+                        <div className={cn("table-header__filter-cell")}>
+                          <TableFilter column={header.column} />
+                        </div>
+                      ) : null}
+                    </>
                   )}
                 </th>
               );

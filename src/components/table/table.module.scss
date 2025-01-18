@@ -16,6 +16,9 @@ thead {
 thead th {
   text-align: left;
   color: variables.$gray_color;
+  &:first-child {
+    padding-left: 48px;
+  }
 }
 
 tr {

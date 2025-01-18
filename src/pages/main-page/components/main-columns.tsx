@@ -9,7 +9,7 @@ const columnHelper = createColumnHelper<Automakers>();
 export const defaultColumns = [
   columnHelper.accessor((row) => row.automakerName, {
     header: () => (
-      <span style={{ paddingLeft: "58px" }}>Автопроизводитель</span>
+      <span>Автопроизводитель</span>
     ),
     cell: AutomakersCell,
     footer: (props) => props.column.id,
@@ -17,11 +17,11 @@ export const defaultColumns = [
     size: 518,
   }),
 
-  columnHelper.accessor((row) => row.car, {
-    header: () => <span style={{ paddingLeft: "10px" }}>Описание</span>,
+  columnHelper.accessor((row) => row.car?.description, {
+    header: () => <span>Описание</span>,
     cell: DescriptionCell,
     footer: (props) => props.column.id,
-    id: "Content",
+    id: "car-description",
     size: 518,
   }),
 
@@ -31,5 +31,6 @@ export const defaultColumns = [
     footer: (props) => props.column.id,
     id: "MenuCell",
     size: 50,
+    enableColumnFilter: false,
   }),
 ];

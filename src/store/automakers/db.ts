@@ -2,6 +2,14 @@ import { Automakers } from "../../pages/types.ts";
 
 export const db = [
   {
+    id: '122',
+    automakerName: 'АБВ',
+    car: {
+      id: '122-1',
+      description: 'Описание'
+    }
+  },
+  {
     id: "123",
     automakerName: "Volkswagen auto group",
     subRows: [

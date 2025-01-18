@@ -20,7 +20,7 @@ export const DescriptionCell = (cell: CellContext<Automakers, unknown>) => {
 
   const showSpecification = () => {
     if (!isEmpty) {
-      table.options.meta?.setSpecification(carSpecification);
+      table.options.meta?.setSpecification(carSpecification || {});
     }
   };
 
