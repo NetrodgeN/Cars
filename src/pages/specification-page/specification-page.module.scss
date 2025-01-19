@@ -1,0 +1,62 @@
+.specification-page {
+  display: flex;
+  padding: 20px 200px;
+  flex-direction: column;
+}
+
+.specification-page__auto-name-wrapper {
+  text-align: center;
+}
+.auto-name-wrapper__title {
+  font-size: 36px;
+  color: #0c0c0b;
+}
+.auto-name-wrapper__description {
+  font-size: 20px;
+  color: gray;
+}
+.specification-page__details {
+  display: flex;
+}
+
+.specification-page__details-img-wrapper {
+  flex: 2;
+}
+
+.specification-page__details-img {
+  width: 800px;
+}
+
+.specification-page__details-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+.details-list {
+}
+.details-list__row {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid gray;
+}
+.details-list__row-left-item {
+  color: gray;
+  flex: 1;
+}
+.details-list__row-right-item {
+  font-weight: 700;
+  flex: 1;
+}
+.car-price {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+.car-price__title {
+  color: gray;
+}
+.car-price__price {
+  font-size: 28px;
+  font-weight: 700;
+}

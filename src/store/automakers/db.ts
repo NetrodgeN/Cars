@@ -30,7 +30,7 @@ export const db = [
               color: "красный",
               VIN: "0000",
               price: "1200000",
-              imgUrl: "http://",
+              imgUrl: "https://images.platform.prod.chery.perx.ru/cr8t08ito5r6o3lgfo90",
             },
           },
           {
