@@ -5,6 +5,7 @@ import styles from "./automakers-cell.module.scss";
 import { Button, BUTTON_SIZE } from "../../../../../components/buttons";
 import Arrow from "../../../../../assets/icons/arrow-down.svg";
 import { Automakers } from "../../../../types.ts";
+import Checkbox from "../../../../../components/checkbox/checkbox.tsx";
 
 const cn = classNames.bind(styles);
 
@@ -31,11 +32,17 @@ export const AutomakersCell = (cell: CellContext<Automakers, unknown>) => {
   };
 
   const subRowCount = row.originalSubRows?.length;
+
   return (
     <div
       className={cn("automakers-cell")}
       style={{ paddingLeft: `${row.depth * 2}rem` }}
     >
+      <Checkbox
+          checked={row.getIsSelected()}
+          onChange={row.toggleSelected}
+          indeterminate={row.getIsSomeSelected()}
+      />
       {row.getCanExpand() && (
         <Button
           onClick={row.getToggleExpandedHandler()}

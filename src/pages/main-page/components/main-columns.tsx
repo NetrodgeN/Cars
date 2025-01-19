@@ -3,14 +3,13 @@ import { AutomakersCell } from "./cells/automakers-cell/automakers-cell.tsx";
 import { Automakers } from "../../types.ts";
 import { DescriptionCell } from "./cells/description-cell/description-cell.tsx";
 import { MenuCell } from "./menu-cell.tsx";
+import {AutomakersHeader} from "./cells/automakers-header/automakers-header.tsx";
 
 const columnHelper = createColumnHelper<Automakers>();
 
 export const defaultColumns = [
   columnHelper.accessor((row) => row.automakerName, {
-    header: () => (
-      <span>Автопроизводитель</span>
-    ),
+    header: AutomakersHeader,
     cell: AutomakersCell,
     footer: (props) => props.column.id,
     id: "name",

@@ -1,0 +1,31 @@
+@use '../../styles/variables' as variables;
+
+.checkbox {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  &:hover {
+    cursor: pointer;
+    background-color: #ffede7;
+  }
+}
+
+.checkbox[data-checked] {
+  background-color: variables.$background_button_color;
+}
+
+.checkbox__checkmark {
+  stroke: variables.$accent_color;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.checkbox[data-checked] .checkbox__checkmark {
+  opacity: 1;
+}
+.checkbox[data-indeterminate] .checkbox__checkmark {
+  opacity: 1;
+}

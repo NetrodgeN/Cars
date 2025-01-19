@@ -8,6 +8,7 @@ import {
   getFilteredRowModel,
   Row,
   RowData,
+  RowSelectionState,
   TableMeta,
   useReactTable,
 } from "@tanstack/react-table";
@@ -41,6 +42,7 @@ export const Table = <TData extends RowData>({
 }: TableProps<TData>) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useReactTable({
     enableRowSelection: true,
@@ -57,20 +59,22 @@ export const Table = <TData extends RowData>({
     meta: metaData,
     onExpandedChange: setExpanded,
     onColumnFiltersChange: setColumnFilters,
+    onRowSelectionChange: setRowSelection,
     getRowId,
     state: {
       expanded,
       columnFilters,
+      rowSelection,
     },
     filterFromLeafRows: true,
   });
-
+  console.log("rowSelection", rowSelection);
   return (
     <table className={cn("table")}>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => {
+            {headerGroup.headers.map((header, index) => {
               return (
                 <th
                   colSpan={header.colSpan}
@@ -84,7 +88,11 @@ export const Table = <TData extends RowData>({
                         header.getContext(),
                       )}
                       {header.column.getCanFilter() ? (
-                        <div className={cn("table-header__filter-cell")}>
+                        <div
+                          className={cn("table-header__filter-cell", {
+                            "table-header__filter-cell--first": index === 0,
+                          })}
+                        >
                           <TableFilter column={header.column} />
                         </div>
                       ) : null}

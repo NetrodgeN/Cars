@@ -16,9 +16,9 @@ thead {
 thead th {
   text-align: left;
   color: variables.$gray_color;
-  &:first-child {
-    padding-left: 48px;
-  }
+}
+.table-header__filter-cell--first {
+  padding-left: 72px;
 }
 
 tr {
