@@ -28,12 +28,13 @@ export const MenuCell = (cell: CellContext<Automakers, unknown>) => {
   };
   const openCreateRowModal = () => {
     openModal(<AddAutomakerModal onSubmit={createRowHandler} />, {
-      modalSize: '500',
+      modalSize: "500",
     });
   };
 
   const deleteRowHandler = () => {
-    table.options.meta?.removeSubRow(row.id, row.parentId);
+      table.resetRowSelection();
+      table.options.meta?.removeRow(row.id, row.parentId);
   };
 
   return (
@@ -44,14 +45,10 @@ export const MenuCell = (cell: CellContext<Automakers, unknown>) => {
           content: "Создать",
           onClick: openCreateRowModal,
         },
-        ...(row.parentId
-          ? [
-              {
-                content: "Удалить",
-                onClick: deleteRowHandler,
-              },
-            ]
-          : []),
+        {
+          content: "Удалить",
+          onClick: deleteRowHandler,
+        },
       ]}
       trigger={<img src={plusIcon} alt="plus-icon" />}
     />

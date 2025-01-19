@@ -16,6 +16,9 @@
 .checkbox[data-checked] {
   background-color: variables.$background_button_color;
 }
+.checkbox[data-disabled] {
+  background-color: variables.$border_gray_color;
+}
 
 .checkbox__checkmark {
   stroke: variables.$accent_color;

@@ -42,6 +42,7 @@ export const AutomakersCell = (cell: CellContext<Automakers, unknown>) => {
           checked={row.getIsSelected()}
           onChange={row.toggleSelected}
           indeterminate={row.getIsSomeSelected()}
+          disabled={!row.getCanSelect()}
       />
       {row.getCanExpand() && (
         <Button

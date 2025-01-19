@@ -6,7 +6,7 @@ import { RowData, TableMeta } from "@tanstack/react-table";
 import { useDispatch, useSelector } from "react-redux";
 import {getActualSpecification, getAutomakersList} from "../../store/automakers/automakers-selectors.ts";
 import { useAddSubRow } from "./hooks/use-add-sub-row.ts";
-import { useRemoveSubRow } from "./hooks/use-remove-sub-row.ts";
+import { useRemoveRow } from "./hooks/use-remove-row.ts";
 import { SpecificationCard } from "./components/specification-card/specification-card.tsx";
 import styles from "./main-page.module.scss";
 import classNames from "classnames/bind";
@@ -19,7 +19,7 @@ declare module "@tanstack/react-table" {
     updateData: (rowIndex: number, columnId: string, value: unknown) => void;
     setSpecification: (value: Specification) => void;
     addSubRow: (parentId: string | number, newSubRow: Automakers) => void;
-    removeSubRow: (subRowIdToDelete: string, parentId?: string) => void;
+    removeRow: (subRowIdToDelete: string | string[], parentId?: string) => void;
   }
 }
 const cn = classNames.bind(styles);
@@ -30,14 +30,14 @@ export const MainPage = () => {
   const automakersList = useSelector(getAutomakersList);
   const actualSpecification = useSelector(getActualSpecification);
   const { addSubRow } = useAddSubRow(automakersList);
-  const { removeSubRow } = useRemoveSubRow(automakersList);
+  const { removeRow } = useRemoveRow(automakersList);
 
   const metaData = {
     setSpecification: (specification) => {
       dispatch(automakersSliceActions.setActualSpecification(specification));
-   },
+    },
     addSubRow,
-    removeSubRow,
+    removeRow,
   } as TableMeta<Automakers[]>;
 
   // Вместо индекса строки, подставляется айди из данных
@@ -45,15 +45,15 @@ export const MainPage = () => {
 
   return (
     <div className={cn("main-page")}>
-      <div className={cn("main-page__table-wrapper")}>
-        <Table
-          columns={defaultColumns}
-          data={automakersList}
-          getSubRows={getSubRows}
-          metaData={metaData}
-          getRowId={getRowId}
-        />
-      </div>
+        <div className={cn("main-page__table-wrapper")}>
+          <Table
+            columns={defaultColumns}
+            data={automakersList}
+            getSubRows={getSubRows}
+            metaData={metaData}
+            getRowId={getRowId}
+          />
+        </div>
       <SpecificationCard specification={actualSpecification} />
     </div>
   );

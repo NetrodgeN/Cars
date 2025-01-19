@@ -8,7 +8,6 @@ import {
   getFilteredRowModel,
   Row,
   RowData,
-  RowSelectionState,
   TableMeta,
   useReactTable,
 } from "@tanstack/react-table";
@@ -17,6 +16,7 @@ import { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./table.module.scss";
 import TableFilter from "./components/table-filter.tsx";
+import { TableFooter } from "./components/table-footer.tsx";
 
 interface TableProps<TData, TValue = any> {
   columns: ColumnDef<TData, TValue>[];
@@ -42,10 +42,9 @@ export const Table = <TData extends RowData>({
 }: TableProps<TData>) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useReactTable({
-    enableRowSelection: true,
+    enableRowSelection: (row) => Number(row.id) !== 5494,
     autoResetPageIndex,
     columns,
     data,
@@ -59,63 +58,66 @@ export const Table = <TData extends RowData>({
     meta: metaData,
     onExpandedChange: setExpanded,
     onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: setRowSelection,
     getRowId,
     state: {
       expanded,
       columnFilters,
-      rowSelection,
     },
     filterFromLeafRows: true,
   });
-  console.log("rowSelection", rowSelection);
+
   return (
-    <table className={cn("table")}>
-      <thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header, index) => {
-              return (
-                <th
-                  colSpan={header.colSpan}
-                  key={header.id}
-                  style={{ width: header.getSize() }}
-                >
-                  {header.isPlaceholder ? null : (
-                    <>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
+    <div className={cn("table__wrapper-")}>
+      <div className={cn("table__wrapper")}>
+        <table className={cn("table")}>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header, index) => {
+                  return (
+                    <th
+                      colSpan={header.colSpan}
+                      key={header.id}
+                      style={{ width: header.getSize() }}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                          {header.column.getCanFilter() ? (
+                            <div
+                              className={cn("table-header__filter-cell", {
+                                "table-header__filter-cell--first": index === 0,
+                              })}
+                            >
+                              <TableFilter column={header.column} />
+                            </div>
+                          ) : null}
+                        </>
                       )}
-                      {header.column.getCanFilter() ? (
-                        <div
-                          className={cn("table-header__filter-cell", {
-                            "table-header__filter-cell--first": index === 0,
-                          })}
-                        >
-                          <TableFilter column={header.column} />
-                        </div>
-                      ) : null}
-                    </>
-                  )}
-                </th>
-              );
-            })}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
+                    </th>
+                  );
+                })}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <TableFooter<TData> table={table} />
+    </div>
   );
 };
 

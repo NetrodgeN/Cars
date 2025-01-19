@@ -1,5 +1,11 @@
 @use '../../styles/variables' as variables;
 
+.table__wrapper {
+  overflow-x: auto;
+  height: calc(100vh - 204px);
+  padding: 0 40px 40px;
+}
+
 table {
   border-collapse: separate;
   border-spacing: 0 5px;
@@ -49,4 +55,12 @@ tr td:last-child {
 td:not(:first-child):not(:last-child) {
   border-right: none;
   border-left: none;
+}
+
+.table__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 42px;
+  height: 48px;
 }
