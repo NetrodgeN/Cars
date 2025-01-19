@@ -8,18 +8,27 @@ const cn = classNames.bind(styles);
 
 export const AutomakersHeader = ({
   table,
-}: HeaderContext<Automakers, string>) => (
-  <div className={cn("automakers-header")}>
-    <div className={cn("automakers-header__checkbox-wrapper")}>
-      <Checkbox
-        checked={table.getIsAllRowsSelected()}
-        indeterminate={table.getIsSomeRowsSelected()}
-        onChange={table.toggleAllRowsSelected}
-      />
+  header,
+}: HeaderContext<Automakers, string>) => {
+  return (
+    <div className={cn("automakers-header")}>
+      <div className={cn("automakers-header__checkbox-wrapper")}>
+        <Checkbox
+          checked={table.getIsAllRowsSelected()}
+          indeterminate={table.getIsSomeRowsSelected()}
+          onChange={table.toggleAllRowsSelected}
+        />
+      </div>
+      <span
+        onClick={header.column.getToggleSortingHandler()}
+        className={cn("automakers-header__title", {
+          "automakers-header__title--sorting": header.column.getCanSort(),
+        })}
+      >
+        Автопроизводитель
+      </span>
     </div>
-
-    <span className={cn("automakers-header__title")}>Автопроизводитель</span>
-  </div>
-);
+  );
+};
 
 AutomakersHeader.displayName = "AutomakersHeader";

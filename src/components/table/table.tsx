@@ -5,9 +5,9 @@ import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
-  getFilteredRowModel,
+  getFilteredRowModel, getSortedRowModel,
   Row,
-  RowData,
+  RowData, SortingState,
   TableMeta,
   useReactTable,
 } from "@tanstack/react-table";
@@ -42,6 +42,10 @@ export const Table = <TData extends RowData>({
 }: TableProps<TData>) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState<SortingState>([{
+    id: 'car-description',
+    desc: false,
+  }])
 
   const table = useReactTable({
     enableRowSelection: (row) => Number(row.id) !== 5494,
@@ -54,14 +58,17 @@ export const Table = <TData extends RowData>({
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     getSubRows,
     meta: metaData,
     onExpandedChange: setExpanded,
     onColumnFiltersChange: setColumnFilters,
+    onSortingChange: setSorting,
     getRowId,
     state: {
       expanded,
       columnFilters,
+      sorting
     },
     filterFromLeafRows: true,
   });
@@ -93,6 +100,14 @@ export const Table = <TData extends RowData>({
                               })}
                             >
                               <TableFilter column={header.column} />
+                              <div style={{width: 10}}>
+                                {
+                                  {
+                                    asc: "↓",
+                                    desc: "↑",
+                                  }[header.column.getIsSorted() as string] ?? null
+                                }
+                              </div>
                             </div>
                           ) : null}
                         </>
