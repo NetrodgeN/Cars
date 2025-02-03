@@ -8,7 +8,7 @@ function TableFilter({ column }: { column: Column<any, unknown> }) {
     <DebouncedInput
       className=""
       onChange={(value) => column.setFilterValue(value)}
-      placeholder={`Search...`}
+      placeholder={`Поиск...`}
       type="text"
       value={(columnFilterValue ?? "") as string}
     />

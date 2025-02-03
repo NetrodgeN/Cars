@@ -26,11 +26,14 @@ export interface TextInputProps {
   isRequired?: boolean;
   isError?: boolean;
   size?: "small" | "medium";
+  readonly?: boolean;
+  className?: string;
 }
 
 export const TextInput = forwardRef(
   (
     {
+      className,
       name,
       value,
       placeholder,
@@ -41,7 +44,8 @@ export const TextInput = forwardRef(
       onFocus,
       onKeyDown,
       isError,
-      size = 'medium',
+      readonly,
+      size = "medium",
       ...anotherProps
     }: TextInputProps,
     ref?: ForwardedRef<HTMLInputElement>,
@@ -52,7 +56,7 @@ export const TextInput = forwardRef(
         value={value}
         className={cn("input", `input--${size}`, {
           "input--invalid": isError,
-        })}
+        }, className)}
         placeholder={placeholder}
         disabled={disabled}
         onBlur={onBlur}
@@ -62,6 +66,7 @@ export const TextInput = forwardRef(
         onFocus={onFocus}
         ref={ref}
         name={name}
+        readOnly={readonly}
       />
     );
   },

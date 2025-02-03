@@ -3,76 +3,53 @@ import { getActualSpecification } from "../../store/automakers/automakers-select
 
 import styles from "./specification-page.module.scss";
 import classNames from "classnames/bind";
+import { useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { CarPrice, DetailsImgBlock, DetailsListRow } from "./components";
 
 const cn = classNames.bind(styles);
+
 export const SpecificationPage = () => {
   const actualSpecification = useSelector(getActualSpecification);
-  console.log("actualSpecification", actualSpecification);
-  const price = new Intl.NumberFormat("ru-RU").format(
-    Number(actualSpecification.price),
-  );
+  const {
+    price,
+    description,
+    imgUrl,
+    VIN,
+    engine,
+    drive,
+    color,
+    equipment,
+    transmission,
+  } = actualSpecification;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!actualSpecification.id) {
+      navigate({
+        to: "/automakers",
+      });
+    }
+  }, []);
+
   return (
     <div className={cn("specification-page")}>
       <div className={cn("specification-page__auto-name-wrapper")}>
-        <h1 className={cn('auto-name-wrapper__title')}> {actualSpecification.description} </h1>
-        <span className={cn('auto-name-wrapper__description')}>{actualSpecification.description}</span>
+        <h1 className={cn("auto-name-wrapper__title")}> {description} </h1>
+        <span className={cn("auto-name-wrapper__description")}>{color}</span>
       </div>
       <div className={cn("specification-page__details")}>
-        <div className={cn("specification-page__details-img-wrapper")}>
-          <img
-            className={cn("specification-page__details-img")}
-            src={actualSpecification.imgUrl}
-            alt=""
-          />
-        </div>
+        <DetailsImgBlock alt={description} url={imgUrl} />
         <div className={cn("specification-page__details-list")}>
           <div className={cn("details-list")}>
-            <div className={cn("details-list__row")}>
-              <div className={cn("details-list__row-left-item")}>Коробка</div>
-              <div className={cn("details-list__row-right-item")}>
-                {actualSpecification.transmission}
-              </div>
-            </div>
-            <div className={cn("details-list__row")}>
-              <div className={cn("details-list__row-left-item")}>
-                Комплектация
-              </div>
-              <div className={cn("details-list__row-right-item")}>
-                {actualSpecification.equipment}
-              </div>
-            </div>
-            <div className={cn("details-list__row")}>
-              <div className={cn("details-list__row-left-item")}>
-                {actualSpecification.transmission}
-              </div>
-              <div className={cn("details-list__row-right-item")}>
-                {actualSpecification.engine}
-              </div>
-            </div>
-            <div className={cn("details-list__row")}>
-              <div className={cn("details-list__row-left-item")}>
-                {actualSpecification.transmission}
-              </div>
-              <div className={cn("details-list__row-right-item")}>
-                {actualSpecification.drive}
-              </div>
-            </div>
-            <div className={cn("details-list__row")}>
-              <div className={cn("details-list__row-left-item")}>Двигатель</div>
-              <div className={cn("details-list__row-right-item")}>
-                {actualSpecification.engine}
-              </div>
-            </div>
-            <div className={cn("details-list__row")}>
-              <div className={cn("details-list__row-left-item")}>Топливо</div>
-              <div className={cn("details-list__row-right-item")}>
-                {actualSpecification.drive}
-              </div>
-            </div>
-          </div>
-          <div className={cn("car-price")}>
-            <span className={cn("car-price__title")}>Стоимость</span>
-            <span className={cn("car-price__price")}>{actualSpecification.price ? price : ""}</span>
+            <DetailsListRow title={"Коробка"} description={transmission} />
+            <DetailsListRow title={"ВИН"} description={VIN} />
+            <DetailsListRow title={"Комплектация"} description={equipment} />
+            <DetailsListRow title={"Двигатель"} description={engine} />
+            <DetailsListRow title={"Топливо"} description={drive} />
+            <DetailsListRow title={"Цвет"} description={color} />
+            <CarPrice price={price} />
           </div>
         </div>
       </div>

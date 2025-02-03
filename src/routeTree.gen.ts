@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as AutomakersIndexImport } from './routes/automakers/index'
 import { Route as AutomakersCarIdImport } from './routes/automakers/$carId'
+import { Route as AutomakersCarIdEditableImport } from './routes/automakers_/$carId/editable'
 
 // Create Virtual Routes
 
@@ -44,6 +45,12 @@ const AutomakersIndexRoute = AutomakersIndexImport.update({
 const AutomakersCarIdRoute = AutomakersCarIdImport.update({
   id: '/automakers/$carId',
   path: '/automakers/$carId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AutomakersCarIdEditableRoute = AutomakersCarIdEditableImport.update({
+  id: '/automakers_/$carId/editable',
+  path: '/automakers/$carId/editable',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -79,6 +86,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AutomakersIndexImport
       parentRoute: typeof rootRoute
     }
+    '/automakers_/$carId/editable': {
+      id: '/automakers_/$carId/editable'
+      path: '/automakers/$carId/editable'
+      fullPath: '/automakers/$carId/editable'
+      preLoaderRoute: typeof AutomakersCarIdEditableImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -89,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/automakers/$carId': typeof AutomakersCarIdRoute
   '/automakers': typeof AutomakersIndexRoute
+  '/automakers/$carId/editable': typeof AutomakersCarIdEditableRoute
 }
 
 export interface FileRoutesByTo {
@@ -96,6 +111,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/automakers/$carId': typeof AutomakersCarIdRoute
   '/automakers': typeof AutomakersIndexRoute
+  '/automakers/$carId/editable': typeof AutomakersCarIdEditableRoute
 }
 
 export interface FileRoutesById {
@@ -104,14 +120,31 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/automakers/$carId': typeof AutomakersCarIdRoute
   '/automakers/': typeof AutomakersIndexRoute
+  '/automakers_/$carId/editable': typeof AutomakersCarIdEditableRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/automakers/$carId' | '/automakers'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/automakers/$carId'
+    | '/automakers'
+    | '/automakers/$carId/editable'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/automakers/$carId' | '/automakers'
-  id: '__root__' | '/' | '/about' | '/automakers/$carId' | '/automakers/'
+  to:
+    | '/'
+    | '/about'
+    | '/automakers/$carId'
+    | '/automakers'
+    | '/automakers/$carId/editable'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/automakers/$carId'
+    | '/automakers/'
+    | '/automakers_/$carId/editable'
   fileRoutesById: FileRoutesById
 }
 
@@ -120,6 +153,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AutomakersCarIdRoute: typeof AutomakersCarIdRoute
   AutomakersIndexRoute: typeof AutomakersIndexRoute
+  AutomakersCarIdEditableRoute: typeof AutomakersCarIdEditableRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -127,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AutomakersCarIdRoute: AutomakersCarIdRoute,
   AutomakersIndexRoute: AutomakersIndexRoute,
+  AutomakersCarIdEditableRoute: AutomakersCarIdEditableRoute,
 }
 
 export const routeTree = rootRoute
@@ -142,7 +177,8 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/automakers/$carId",
-        "/automakers/"
+        "/automakers/",
+        "/automakers_/$carId/editable"
       ]
     },
     "/": {
@@ -156,6 +192,9 @@ export const routeTree = rootRoute
     },
     "/automakers/": {
       "filePath": "automakers/index.tsx"
+    },
+    "/automakers_/$carId/editable": {
+      "filePath": "automakers_/$carId/editable.tsx"
     }
   }
 }

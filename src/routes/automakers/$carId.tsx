@@ -6,7 +6,5 @@ export const Route = createFileRoute("/automakers/$carId")({
 });
 
 function RouteComponent() {
-  const { carId } = Route.useParams();
-  console.log("carId", carId);
   return <SpecificationPage />;
 }

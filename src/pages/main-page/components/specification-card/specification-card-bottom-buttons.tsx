@@ -14,9 +14,12 @@ export const SpecificationCardBottomButtons = ({
   const navigate = useNavigate({ from: "/automakers" });
 
   const openEditPageHandler = () => {
+    navigate({ to: "/automakers/$carId/editable", params: { carId } });
+  };
+
+  const openDetailPageHandler = () => {
     navigate({ to: "/automakers/$carId", params: { carId } });
   };
-  const openDetailPageHandler = () => {};
 
   return (
     <div className={cn("specification-card-bottom-buttons")}>

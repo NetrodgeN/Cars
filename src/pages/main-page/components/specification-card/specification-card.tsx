@@ -42,8 +42,7 @@ export const SpecificationCard = ({
       <InfoBlock title={"Стоимость"} description={price} />
       <InfoBlock title={"Комплектация"} description={equipment} />
       <InfoBlock title={"Коробка"} description={transmission} />
-        {id && (<SpecificationCardBottomButtons carId={id} />)}
-
+      <SpecificationCardBottomButtons carId={id} />
     </div>
   );
 };
